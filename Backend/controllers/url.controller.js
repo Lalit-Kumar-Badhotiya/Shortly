@@ -47,4 +47,83 @@ export const shortCode = async (req , res ) => {
             error: "URL for this short code not found"
         });
     }
+    res.redirect(result.target);
 }
+
+export const getAllCodes = async (req,res) =>{
+    const userId = req.user.id;
+
+    console.log("req.user is getAllCodes",userId);
+
+    const codes = await db
+        .select()
+        .from(urlsTable)
+        .where(eq(urlsTable.userId, userId));
+    console.log('coded found by id',codes);
+
+    return res.status(200).json({ codes });
+};
+
+export const deleteUrl = async (req,res)=>{
+    const id = req.params.id;
+
+    const userId = req.user.id;
+
+    console.log("url delete id ",id);
+    console.log("req.user in delete route",userId);
+
+    await db
+        .delete(urlsTable)
+        .where(and(eq(urlsTable.id,id),eq(urlsTable.userId,req.user.id)));
+    return res.status(200).json({ deleted: true });
+};
+
+export const updateUrl = async (req,res) => {
+    const { shortCode, target } = req.body;
+    console.log("req body of updateurl", shortCode);
+    
+    const id = req.params.id;
+
+    const userId = req.user.id;
+
+    if(!shortCode && !target){
+        return res
+            .status(404)
+            .json({error: "Short code or target is required for updation"});
+    }
+
+    const existingUrl = await getUrlById(id);
+
+    if(!existingUrl){
+        return res
+            .status(404)
+            .json({ error: "The url you are trying to update does not exist" })
+    }
+
+    if(existingUrl.userId !== userId){
+        return res.status(403).json({
+            error: "You are not allowed to update this URL",
+        });
+    }
+
+    const [updated] = await db
+        .update(urlsTable)
+        .set({shortCode,target})
+        .where(and(eq(urlsTable.userId,userId), eq(urlsTable.id,id)))
+        .returning({
+            id: urlsTable.id,
+            shortCode: urlsTable.shortCode,
+            target: urlsTable.target,
+        });
+    if(!updated){
+        return res.status(400).json({
+            error: "Update failed",
+        });
+    }
+
+    return res.status(200).json({
+        updated: true,
+        date: updated
+
+    });
+};
