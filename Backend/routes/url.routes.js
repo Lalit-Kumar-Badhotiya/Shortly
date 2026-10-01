@@ -1,5 +1,5 @@
 import express from 'express'
-import { deleteUrl, getAllCodes, shortCode, shortenUrl, updateUrl } from '../controllers/url.controller'
+import { deleteUrl, getAllCodes, shortCode, shortenUrl, updateUrl } from '../controllers/url.controller.js'
 import { ensureAuthenticated } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();

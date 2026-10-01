@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
-import db from '../db/index';
-import { urlsTable } from '../models/index'
+import db from '../db/index.js';
+import { urlsTable } from '../models/index.js'
 
 export const createShortUrl = async (payload) => {
     const [result] = await db 

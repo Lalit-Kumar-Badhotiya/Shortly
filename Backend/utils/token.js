@@ -1,4 +1,4 @@
-import { userTokenSchema } from '../validations/token.validation'
+import { userTokenSchema } from '../validations/token.validation.js'
 import jwt from 'jsonwebtoken'
 
 export const createUserToken = async (payload) =>{
@@ -15,7 +15,7 @@ export const createUserToken = async (payload) =>{
     return token;
 };
 
-export const valodateUserToken = (token) => {
+export const validateUserToken = (token) => {
     try{
         const payload = jwt.verify(token,process.env.JWT_SECRET);
         return payload;
