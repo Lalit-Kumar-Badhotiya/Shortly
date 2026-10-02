@@ -63,7 +63,7 @@ const URLCard = ({ url, onDelete, onUpdate }) => {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       whileHover={{ y: -4, shadow: "0 10px 30px -10px rgba(0,0,0,0.1)" }}
-      className="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm transition-all duration-300 group"
+      className="w-full max-w-6xl mx-auto bg-white rounded-2xl p-6 border border-stone-200 shadow-sm transition-all duration-300 group"
       data-testid="url-card"
     >
       <AnimatePresence mode="wait">
@@ -131,7 +131,7 @@ const URLCard = ({ url, onDelete, onUpdate }) => {
             {/* Action Footer */}
             <div className="flex items-center justify-between pt-4 border-t border-stone-100">
               <div className="text-xs text-stone-400 font-medium">
-                 {/* You could add a timestamp here later */}
+                 {/* i can add a timestamp here later */}
                  ID: {url.shortCode}
               </div>
               
