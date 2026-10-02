@@ -53,7 +53,7 @@ export const login = async (req, res) => {
     if(validationResult.error){
         return res.status(400).json({ error: validationResult.error.format() });
     }
-
+    const { email, password } = req.body;
     const user = await getUserByEmail(email);
 
     if(!user){
