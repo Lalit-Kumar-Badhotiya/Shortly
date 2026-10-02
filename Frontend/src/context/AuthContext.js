@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { getToken, saveToken, removeToken, clearAuth } from '../utils/localStorage';
+import { getToken, saveToken, clearAuth } from '../utils/localStorage';
 
 const AuthContext = createContext(null);
 

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
-import { ArrowRight, Zap, Lock, BarChart, Globe, Link2, CheckCircle } from 'lucide-react';
+import { ArrowRight, Zap, Lock, BarChart, Globe, CheckCircle } from 'lucide-react';
 
 const Home = () => {
   const { isAuthenticated } = useAuth();
