@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { getToken, saveToken, clearAuth } from '../utils/localStorage';
+import { getToken, saveToken, getUser, saveUser, clearAuth } from '../utils/localStorage';
 
 const AuthContext = createContext(null);
 
@@ -13,9 +13,8 @@ export const AuthProvider = ({ children }) => {
     const existingToken = getToken();
     if (existingToken) {
       setToken(existingToken);
-      // You could decode the JWT here to get user info
-      // For now, we'll just mark the user as authenticated
-      setUser({ authenticated: true });
+      // Restore the saved user profile (name/email/picture) if we have one
+      setUser(getUser() || { authenticated: true });
     }
     setLoading(false);
   }, []);
@@ -24,6 +23,9 @@ export const AuthProvider = ({ children }) => {
     saveToken(authToken);
     setToken(authToken);
     setUser(userData || { authenticated: true });
+    if (userData) {
+      saveUser(userData);
+    }
   };
 
   const logout = () => {

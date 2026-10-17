@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { login as loginService } from '../services/authService';
 import Navbar from '../components/Navbar';
+import GoogleAuthButton from '../components/GoogleAuthButton';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Lock, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
 
@@ -31,7 +32,7 @@ const Login = () => {
 
     try {
       const response = await loginService(formData);
-      login(response.token);
+      login(response.token, response.user);
       navigate('/dashboard');
     } catch (err) {
       setError(err.error || 'Login failed. Please check your credentials.');
@@ -141,6 +142,8 @@ const Login = () => {
                 )}
               </motion.button>
             </form>
+
+            <GoogleAuthButton />
 
             <div className="mt-8 text-center">
               <p className="text-stone-500 font-medium">

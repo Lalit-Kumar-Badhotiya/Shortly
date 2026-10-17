@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { signup as signupService } from '../services/authService';
 import Navbar from '../components/Navbar';
+import GoogleAuthButton from '../components/GoogleAuthButton';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, Mail, Lock, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
 
@@ -212,6 +213,8 @@ const Signup = () => {
                 )}
               </motion.button>
             </form>
+
+            <GoogleAuthButton />
 
             <div className="mt-8 text-center">
               <p className="text-stone-500 font-medium">

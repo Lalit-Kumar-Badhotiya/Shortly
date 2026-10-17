@@ -16,3 +16,8 @@ export const shortenPostRequestBodySchema = z.object({
     url: z.string().url(),
     code: z.string().optional()
 })
+
+export const googleAuthPostRequestBodySchema = z.object({
+    // JWT credential returned by the "Continue with Google" button
+    credential: z.string().min(10),
+})
